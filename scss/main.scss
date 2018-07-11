@@ -1,0 +1,316 @@
+@import 'normalize';
+@import 'settings';
+
+body {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5)) no-repeat, url("../bg-image.jpg") no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+
+/* header's styling 
+  ------------------------------------------------------------------*/ 
+  .header {
+    @include nav;
+    @include flexwrap(row, wrap, space-between, stretch);
+
+    background: $color__header--bg;
+    width: 100%;
+    text-align: center;
+    box-shadow: box-shadow(0.2rem, $color__header--bg);
+
+    @include m('wrapper') {
+      @include flexwrap();
+    }
+
+    @include e('brand') {
+      flex: 1 3 auto;
+    }
+
+    @include e('title') {
+      color: $color__title--primary;
+      font-family: $font__title;
+      padding: 10px 20px;
+      margin: 1px 1px;
+    }
+
+    @include e('nav') {
+      flex: 3 1 auto;
+    }
+
+    @include e('list') {
+      flex: 1;
+      border-top: 1px solid rgba(228, 213, 204, 0.6);
+
+      @include m('item') {
+        flex: 1 0 auto;
+      }
+
+      @include m('link') {
+        @extend %transition;
+
+        flex: 1;
+        min-width: 13rem;
+        color: $color__title--primary;
+        font-size: 1.8rem;
+        padding: 1rem 1rem;
+        text-transform: uppercase;
+
+      }
+
+      @include m('icon') {
+        margin-right: 0.3em;
+      }
+
+      @include m('active') {
+        @extend %transition;
+        background: $color__nav--bg-active;
+      }
+    }  
+  }
+
+/* main content's styling 
+  -----------------------------------------------------------------*/
+  .main {
+    @include flexwrap();
+    font-size: 2.2rem;
+    color: $color__input--bg;
+    margin: 2% auto;
+
+    @include m('wrapper') {
+      @include flexwrap(column, wrap, flex-start, center);
+      width: 70%;
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+
+    @include m('blue') {
+      border: 3px double $color__title--primary;
+      background: $color__section--bg;
+      box-shadow: box-shadow(0.1rem, $color__section--bg);
+    }
+
+    @include e('title') {
+      text-align: center;
+    }
+  }
+
+  .task {
+    background: transparentize(#D1B6E1, 0.7);
+    padding: 0;
+
+    @include e('title') {
+      width: 100%;
+      padding: 1rem 0;
+      margin: 0;
+      background: transparentize(#D1B6E1, 0.4);
+      text-align: center;
+    }
+
+    @include e('detail') {
+      @extend %transition;
+
+      padding: 1rem 0;
+      margin: 0;
+      text-align: center;
+      width: 100%;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+  .about {
+    width: 80%;
+    padding: 1rem;
+
+    @include e('text') {
+      margin: 1rem 0;
+    }
+
+    @include e('title') {
+      margin: 1.4rem 0;
+    }
+  }
+
+  .form {
+    @include flexwrap(row, wrap, center, stretch);
+
+    width: 90%;
+    height: 6rem;
+
+    @include e('item') {
+      display: block;
+      margin: 0.5rem 1rem;
+    }
+
+    @include e('input') {
+      @extend %text-input;
+      min-width: 60%;
+      padding: 0.5rem 1rem;
+    }
+
+    @include e('btn') {
+      @extend %transition;
+    }
+  }
+
+  .list__wrapper {
+    margin: 3rem auto;
+    padding: 0 0 1rem;
+    border: 0.2rem solid $color__button--bg;
+
+    .list__title {
+      border-bottom: 0.2rem dashed $color__button--bg;
+      width: 100%;
+      margin: 0;
+      background: $color__button--bg;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .ordered-list {
+      width: 90%;
+  
+      @include e('item') {
+        padding: 0.6rem 4rem 0.3rem;
+        border-bottom: 0.2rem dashed $color__button--bg;
+      }
+
+      @include e('link') {
+        @extend %transition;
+
+        color: $color__header--bg;
+        font-size: 2.5rem;
+
+        &:hover {
+          color: lighten($color__header--bg, 50%);
+        }
+      }
+  
+    }
+  }
+  
+
+/* Footer styling 
+  ---------------------------------------------------------------------------*/
+  .footer {
+    @include nav;
+    @include flexwrap(column, nowrap, center, center);
+
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+
+    .nav {
+      width: 50%;
+    }
+
+    .nav__list {
+      width: 80%;
+    }
+
+    .nav__icon {
+      font-size: 3.5rem;
+      color: $color__title--primary;
+    }
+
+
+    @include e('copyright') {
+      font-size: 1.5rem;
+    }
+  }
+
+
+@media screen and (max-width: $breakpoint__pad) {
+  .main {
+    margin: 0;
+  }
+
+  .main--wrapper {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+  }
+
+  .form {
+    width: 100%;
+    height: 5rem;
+  }
+
+  .list__wrapper {
+    border: 0.2rem solid #D1B6E1;
+  }
+}
+
+@media screen and (max-width: $breakpoint__mobile) {
+  .main {
+
+    @include m('blue') {
+      padding: 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+  }
+  
+  .form {
+    height: 4.5rem;
+    justify-content: space-around;
+
+    @include e('item') {
+      margin: 0.5rem;
+    }
+
+    @include e('input') {
+      width: 70%;
+      font-size: 1.6rem;
+    }
+
+    @include e('btn') {
+      padding: 0 1rem;
+    }
+  }
+
+  .about {
+    @include e('text') {
+      font-size: 1.8rem;
+    }
+
+    @include e('title') {
+      font-size: 2.4rem;
+    }
+  }
+
+  .list {
+
+    @include e('title') {
+      font-size: 2rem;
+    }
+
+  }
+
+  .list__wrapper {
+    .ordered-list {
+
+      @include e('item') {
+        padding-left: 2rem; 
+      }
+      
+      @include e('link') {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  .footer {
+    .nav {
+      width: 75%;
+    }
+  }
+
+  
+}

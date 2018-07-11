@@ -1,0 +1,174 @@
+/* Variables
+  ------------------------------------------------------------------------*/
+
+  $color__title--primary: #519D9E !default;
+  $color__title--secondary: #58C9B9 !default; 
+  $color__button--bg: #D1B6E1 !default;
+  $color__button: rgb(90, 85, 85);
+  $color__button--hover: lighten($color__button, 0.5);
+  $color__section--bg: rgba(157, 200, 200, 0.85) !default;
+  $color__header--bg: #ffeee4 !default;
+  $color__input--border: rgb(199, 201, 201);
+  $color__input--bg: lighten($color__header--bg, 1);
+  $color__nav--bg-active: darken($color__header--bg, 10%) !default;
+  $color__font: rgb(90, 85, 85);
+  $box-shadow: 2px 4px 2px darken($color__header--bg, 5%) !default;
+  $font__title: 'Galada', cursive !default;
+  $font__content: 'Gaegu', cursive !default;
+  $breakpoint__mobile: 480px;
+  $breakpoint__pad: 800px;
+
+/* Templates
+  ------------------------------------------------------------------------*/
+
+  %transition {
+    transition: all .3s ease-in-out;
+  }
+
+  %text-input {
+    border: 1px dotted $color__input--border;
+    border-radius: 0.5rem;
+    background: $color__input--bg;
+  }
+
+
+  /* Mixins
+    -------------------------------------------------------------------------*/
+  @function box-shadow($base-size, $base-color) {
+    @return $base-size 2*$base-size $base-size darken($base-color, 5%); 
+  }
+
+  @mixin flexwrap($direction: row, $wrap: wrap,  $justify: center, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    flex-wrap: $wrap;
+    justify-content: $justify;
+    align-items: $align;
+  }
+
+  // block element mixin
+  @mixin element($element) {
+    &__#{$element} {
+      @content;
+    }
+  }
+
+  // @alias element
+  @mixin e($element) {
+    @include element($element)  {
+        @content;
+    }
+  }
+
+  // modifier mixin
+  @mixin modifier($modifier) {
+    &--#{$modifier} {
+      @content;
+    }
+  }
+
+  //  @alias modifier
+  @mixin m($modifier) {
+    @include modifier($modifier) {
+        @content;
+    }
+  }
+
+  @mixin nav {
+    .nav {
+      @include flexwrap(row, wrap, center, stretch);
+    }
+
+    .nav__list {
+      @include flexwrap(row, nowrap, center, stretch);
+    }
+
+    .nav__item {
+      flex: 1;
+    }
+  
+    .nav__link {
+      @include flexwrap(row, nowrap, center, center);
+  
+      height: 100%;
+    }
+
+    .nav__link:hover {
+      @extend %transition;
+      background: $color__nav--bg-active;
+    }
+  
+    .nav__icon {
+      display: inline-block;
+    }
+  }
+
+/* Base 
+  --------------------------------------------------------------------------*/
+
+  html {
+    box-sizing: border-box;
+    font-size: 62.5%; // reset 1rem to 10px
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  h1, h2 {
+    font-family: $font__title;
+    letter-spacing: 0.2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  body {
+    font-family: $font__content;
+  }
+
+  ul,
+  ol {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+
+  ol li {
+    list-style: decimal inside;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color__font;
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.3rem 3rem;
+    cursor: pointer;
+    color: $color__button;
+    box-shadow: box-shadow(0.1rem, $color__button);
+  }
+
+  .btn:hover {
+    background: #ffeee4;
+    color: $color__button--hover;
+  }
+
+
